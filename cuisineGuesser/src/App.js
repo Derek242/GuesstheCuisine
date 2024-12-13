@@ -6,15 +6,20 @@ function App() {
     const [areas, setAreas] = useState([]);  // Stores all countries/areas
     const [feedback, setFeedback] = useState('');  // Stores feedback for the player
 
-    // Fetch the random meal when the component mounts
-    useEffect(() => {
-        fetch('http://localhost:5000/api/random-meal')
+    // Function to fetch a random meal
+    const fetchRandomMeal = () => {
+        fetch('http://localhost:5000/api/random-meal') // Fetching from backend
             .then((response) => response.json())
             .then((data) => {
                 console.log('Meal fetched:', data);  // Check what data is logged here
                 setMeal(data);
             })
             .catch((error) => console.error('Error fetching meal:', error));
+    };
+
+    // Fetch the random meal when the component mounts or after a correct guess
+    useEffect(() => {
+        fetchRandomMeal();
     }, []);
 
     // Fetch the list of areas when the component mounts
@@ -29,6 +34,7 @@ function App() {
     const handleGuess = (selectedArea) => {
         if (meal && selectedArea === meal.country) {
             setFeedback('Correct! 🎉');
+            fetchRandomMeal(); // Fetch a new random meal after a correct guess
         } else {
             setFeedback('Wrong! Try again.');
         }
