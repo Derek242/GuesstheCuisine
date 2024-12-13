@@ -5,7 +5,7 @@ function App() {
   const [meal, setMeal] = useState(null); // Stores the random meal
   const [areas, setAreas] = useState([]); // Stores all countries/areas
   const [feedback, setFeedback] = useState(""); // Stores feedback for the player
-  const [chances, setChances] = useState(50); // Number of remaining chances
+  const [chances, setChances] = useState(50); // Number of remaining chances, default to 50 
   const [gameOver, setGameOver] = useState(false); // Whether the game is over
   const [score, setScore] = useState(0);  // Player's score
 
@@ -57,6 +57,7 @@ function App() {
   // Restart the game
   const restartGame = () => {
     setChances(50);
+    setScore(0); // Reset the score to zero
     setGameOver(false);
     setFeedback("");
     fetchRandomMeal(); // Start with a new random meal
