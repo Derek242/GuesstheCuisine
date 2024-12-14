@@ -5,9 +5,10 @@ function App() {
   const [meal, setMeal] = useState(null); // Stores the random meal
   const [areas, setAreas] = useState([]); // Stores all countries/areas
   const [feedback, setFeedback] = useState(""); // Stores feedback for the player
-  const [chances, setChances] = useState(50); // Number of remaining chances, default to 50 
+  const [lives, setLives] = useState(5); // Number of remaining lives, default to 5
   const [gameOver, setGameOver] = useState(false); // Whether the game is over
   const [score, setScore] = useState(0);  // Player's score
+  const [guessedAreas, setGuessedAreas] = useState(new Set()); // Track guessed areas
 
   // Function to fetch a random meal
   const fetchRandomMeal = () => {
@@ -43,29 +44,34 @@ function App() {
       fetchRandomMeal(); // Fetch a new random meal after a correct guess
     } else {
       setFeedback("Wrong! Try again.");
-      // Decrement chances only on incorrect guesses
-      setChances((prevChances) => {
-        const updatedChances = prevChances - 1;
-        if (updatedChances === 0) {
-          setGameOver(true); // End the game when chances run out
+  
+       // Decrement lives only on incorrect guesses
+       setLives((prevLives) => {
+        const updatedLives = prevLives - 1;
+        if (updatedLives === 0) {
+          setGameOver(true); // End the game when lives run out
         }
-        return updatedChances;
+        return updatedLives;
       });
+      // Disable the button for this area
+    setGuessedAreas(new Set([...guessedAreas, selectedArea]));
+
     }
   };
 
   // Restart the game
   const restartGame = () => {
-    setChances(50);
+    setLives(5);
     setScore(0); // Reset the score to zero
     setGameOver(false);
     setFeedback("");
+    setGuessedAreas(new Set()); // Clear guessed areas
     fetchRandomMeal(); // Start with a new random meal
   };
 
   return (
     <div>
-      <h1>Food Guesser Game</h1>
+      <h1>Guess The Cuisine</h1>
       {meal ? (
         <div>
           <img
@@ -73,7 +79,20 @@ function App() {
             alt="Random Meal"
             style={{ width: "300px", height: "300px" }}
           />
-          <p>Remaining Chances: {chances}</p>
+          <p>
+            {Array.from({ length: 5 }, (_, i) => (
+              <span
+                key={i}
+                style={{
+                  fontSize: "5rem",
+                  color: i < lives ? "red" : "gray",
+                  margin: "0 5px",
+                }}
+              >
+                ♥
+              </span>
+            ))}
+          </p>
           <p>Score: {score}</p> {/* Display player's score */}
           {gameOver && <button onClick={restartGame}>Restart Game</button>}
         </div>
@@ -82,21 +101,28 @@ function App() {
       )}
 
       <h2>Guess the country:</h2>
+      <h3>{feedback}</h3>
       <div>
         {areas.length > 0 ? (
           areas.map((area) => (
-            <button key={area} onClick={() => handleGuess(area)}>
+            <button key={area} onClick={() => handleGuess(area)}
+              disabled={guessedAreas.has(area)} // Disable button if already guessed
+              style={{
+                backgroundColor: guessedAreas.has(area) ? "#ccc" : "#DAA06D",
+              }}
+            >
               {area}
             </button>
           ))
         ) : (
           <p>Loading countries...</p>
         )}
-      </div>
+      </div>     
 
-      <h3>{feedback}</h3>
+    
     </div>
   );
+  
 }
 
 export default App;
