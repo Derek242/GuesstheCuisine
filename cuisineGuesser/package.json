@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cors": "^2.8.5",
     "cra-template": "1.2.0",
     "firebase": "^11.0.2",
+    "node-fetch": "^3.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
+    "server.js": "^1.0.0",
     "web-vitals": "^4.2.4"
   },
   "scripts": {
