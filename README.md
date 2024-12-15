@@ -9,17 +9,20 @@ Nodejs
 Npm
 
 ### Backend:
-
-npm i install cors
-npm i
-cd cuisineGuesser/src
-node server.js
-
+```
+1) npm i install cors
+2) npm i
+3) cd cuisineGuesser/src
+4) node server.js
+```
 http://localhost:5000/
 
 
 ### FrontEnd
-cd cuisineGuesser
-npm i
-npm run start
+```
+1) cd cuisineGuesser
+2) npm i
+3) npm run start
+```
+
 http://localhost:3000/
