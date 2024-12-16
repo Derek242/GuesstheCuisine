@@ -1,0 +1,12 @@
+ button {
+    background-color:  #ee9d56;
+    color: #8B4000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+    font-family: "Times New Roman", Times, serif;
+  }

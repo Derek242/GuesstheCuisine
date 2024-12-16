@@ -1,64 +1,14 @@
 body {
-  font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #CC5500; /* Updated background color */
   margin: 0;
   padding: 0;
-  margin-bottom: 20px;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #d27746, #d56b1f);
+  font-family: "Times New Roman", Times, serif;
 }
 
-h1 {
-  font-family: 'Island Moments', cursive;
-  font-size: 3rem;
-  color:  #F4BB44; /* Adjusted text color for better contrast */
-  margin-top: 20px;
-}
-
-img {
-  display: block;
-  margin: 20px auto; /* Center the image horizontally */
-  border-radius: 10px;
-  border: 2px solid  #F4BB44; /* Added  border */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-p {
-  font-size: 1.2rem;
-  color: #fff; /* Adjusted text color for better contrast */
-}
-
-h2 {
-  margin-top: 30px;
-  color:  #F4BB44;
-  font-family: 'Times New Roman', Times, serif;
-}
-
-h3 {
-  font-size: 1.5rem;
-  color: #F4BB44;
-  margin-top: 20px;
-}
-
-button {
-  background-color: #DAA06D;
-  color: #8B4000;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  margin: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  
-}
-
-button:hover {
-  background-color: #DAA06D;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+body.no-scroll {
+  overflow: hidden; /* Prevent scrolling */
 }
 
 

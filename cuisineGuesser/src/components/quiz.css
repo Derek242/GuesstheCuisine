@@ -1,0 +1,105 @@
+.quizbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    gap: 25px; 
+    padding: 0 20px;
+}
+.area {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* Create two equal-width columns */
+    row-gap: 10px; /* Add spacing between items */
+    column-gap: 50px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+.centerimage {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.centertext {
+    font-family: 'Island Moments', cursive;
+    font-weight: bold;
+    font-size: 5rem;
+    color:  #F4BB44; /* Adjusted text color for better contrast */
+    margin-top: 20px;
+}
+
+img {
+    display: block;
+    margin: 20px auto; /* Center the image horizontally */
+    border-radius: 10px;
+    border: 2px solid  #9b4e42a8; /* Added  border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  button {
+    background-color:  #ee9d56;
+    color: #8B4000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+  }
+
+  .flag-button {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevent overflow of images */
+    background-color: transparent; /* Transparent background */
+    background-size: 100% 100%; /* Stretch flag to fit button dimensions */
+    background-repeat: no-repeat; /* Prevent background image repetition */
+    background-position: center; /* Center the flag */
+    cursor: pointer;
+    width: 90px; /* Set fixed width */
+    height: 50px; /* Set fixed height */
+    padding: 0;
+    margin: 5px 0; /* Add vertical spacing */
+  }
+  
+
+  .popup {
+    position: fixed;
+    top: 50%; /* Align at the top */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3c1a04d8;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000; 
+    text-align: center;
+    align-items: center;
+  }
+
+  .quizcontainer {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color:  #F4BB44;
+  }
+
+  .lives {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color:  #F4BB44;
+  }
+
+  .score{
+    font-weight: bold;
+    font-size: 1.5rem;
+    color:  #F4BB44;
+  }

@@ -22,6 +22,7 @@ app.get('/api/random-meal', async (req, res) => {
     res.json({
       image: meal.strMealThumb,
       country: meal.strArea,
+      name: meal.strMeal
     });
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch random meal' });

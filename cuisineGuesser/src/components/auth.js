@@ -170,7 +170,6 @@ export const Auth = ({ setUser }) => {
         <div>
             {auth.currentUser ? (
                 <div>
-                    <p>Welcome, {auth.currentUser.email}</p>
                     <button onClick={logout}>Log Out</button>
                 </div>
             ) : (
