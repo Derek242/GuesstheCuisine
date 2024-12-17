@@ -30,6 +30,7 @@ function QuizPage({ user }) {
       setMeal(data);
       setCorrectCountry(data.country); // Set correct country
       setFoodName(data.name); // Set food name
+      console.log(data.country)
     } catch (error) {
       console.error("Error fetching meal:", error);
     }
@@ -115,7 +116,10 @@ function QuizPage({ user }) {
       setFeedback("Wrong! Try again.");
       setLives((prev) => {
         const newLives = prev - 1;
-        if (newLives === 0) setGameOver(true);
+        if (newLives === 0) {
+          setGameOver(true);
+          updateHighestScore(score);
+        }
         return newLives;
       });
       setGuessedAreas((prev) => new Set([...prev, selectedArea]));
