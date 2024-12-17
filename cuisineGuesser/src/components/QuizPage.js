@@ -30,9 +30,8 @@ function QuizPage({ user }) {
       const data = await response.json();
       setMeal(data);
       setCorrectCountry(data.country); // Set correct country
-      console.log(data.country);
       setFoodName(data.name); // Set food name
-      console.log(data.country)
+      console.log(data.country) //NOT CHEATING, testing purposes. 
     } catch (error) {
       console.error("Error fetching meal:", error);
     }
