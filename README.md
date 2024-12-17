@@ -10,7 +10,7 @@ Npm
 
 ### Backend:
 
-npm i install cors
+npm i install cors 
 npm i
 cd cuisineGuesser/src
 node server.js
