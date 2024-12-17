@@ -16,6 +16,7 @@ function QuizPage({ user }) {
   const [correctCountry, setCorrectCountry] = useState(""); // For correct country
   const [foodName, setFoodName] = useState(""); // For food name
   const [clickedAreas, setClickedAreas] = useState(new Set());
+  const [flagUrls, setFlagUrls] = useState({});
 
 
   useEffect(() => {
@@ -29,6 +30,7 @@ function QuizPage({ user }) {
       const data = await response.json();
       setMeal(data);
       setCorrectCountry(data.country); // Set correct country
+      console.log(data.country);
       setFoodName(data.name); // Set food name
       console.log(data.country)
     } catch (error) {
@@ -49,6 +51,7 @@ function QuizPage({ user }) {
     };
     fetchAreas();
   }, []);
+  
   useEffect(() => {
     const fetchUserHighestScore = async (email) => {
       if (!email) return;
@@ -117,8 +120,8 @@ function QuizPage({ user }) {
       setLives((prev) => {
         const newLives = prev - 1;
         if (newLives === 0) {
+          updateHighestScore(score); 
           setGameOver(true);
-          updateHighestScore(score);
         }
         return newLives;
       });
@@ -144,44 +147,42 @@ function QuizPage({ user }) {
   const leftAreas = areas.slice(0, splitIndex);
   const rightAreas = areas.slice(splitIndex);
 
-  const codeMap = {
-    American: "us",
-    British: "gb",
-    Canadian: "ca",
-    Chinese: "cn",
-    Croatian: "hr",
-    Dutch: "nl",
-    Egyptian: "eg",
-    Filipino: "ph",
-    French: "fr",
-    Greek: "gr",
-    Indian: "in",
-    Irish: "ie",
-    Italian: "it",
-    Jamaican: "jm",
-    Japanese: "jp",
-    Kenyan: "ke",
-    Malaysian: "my",
-    Mexican: "mx",
-    Moroccan: "ma",
-    Polish: "pl",
-    Portuguese: "pt",
-    Russian: "ru",
-    Spanish: "es",
-    Thai: "th",
-    Tunisian: "tn",
-    Turkish: "tr",
-    Ukrainian: "ua",
-    Vietnamese: "vn",
-  };
   
-  const getFlagUrl = (country) => {
-    const code = codeMap[country];
-    return code
-      ? `https://flagcdn.com/w320/${code}.png`
-      : "https://via.placeholder.com/100?text=Flag+Not+Found";
+  const getFlagUrl = async (country) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/flag?country=${encodeURIComponent(country)}`
+      );
+      const data = await response.json();
+  
+      if (response.ok) {
+        return data.flag; // Flag URL from backend
+      } else {
+        console.error("Error fetching flag:", data.error);
+        return "https://via.placeholder.com/100?text=Flag+Not+Found";
+      }
+    } catch (error) {
+      console.error("Network error fetching flag:", error);
+      return "https://via.placeholder.com/100?text=Flag+Not+Found";
+    }
   };
 
+  useEffect(() => {
+    const fetchFlags = async () => {
+      const flags = {};
+      for (const area of areas) {
+        flags[area] = await getFlagUrl(area);
+      }
+      setFlagUrls(flags);
+    };
+  
+    if (areas.length > 0) {
+      fetchFlags();
+    }
+  }, [areas]);
+
+  
+  
   return (
     <Container className="quizcontainer">
       {/* Title and User Info */}
@@ -209,8 +210,9 @@ function QuizPage({ user }) {
               style={{
                 backgroundColor: "transparent",
                 backgroundImage: !clickedAreas.has(area) && !guessedAreas.has(area)
-                  ? `url(${getFlagUrl(area)})`
-                  : "none", // Remove background image when clicked or guessed
+                  ? `url(${flagUrls[area] || "https://via.placeholder.com/100?text=Flag+Not+Found"})`
+                  : "none", // Use pre-fetched flag URL or fallback placeholder
+                backgroundSize: "cover",
                 color: "black",
                 fontWeight: "bold",
                 textAlign: "center",
@@ -269,8 +271,9 @@ function QuizPage({ user }) {
               style={{
                 backgroundColor: "transparent",
                 backgroundImage: !clickedAreas.has(area) && !guessedAreas.has(area)
-                  ? `url(${getFlagUrl(area)})`
-                  : "none", // Remove background image when clicked or guessed
+                  ? `url(${flagUrls[area] || "https://via.placeholder.com/100?text=Flag+Not+Found"})`
+                  : "none", // Use pre-fetched flag URL or fallback placeholder
+                backgroundSize: "cover",
                 color: "black",
                 fontWeight: "bold",
                 textAlign: "center",

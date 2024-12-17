@@ -5,7 +5,63 @@ import cors from 'cors';
 const app = express();
 const PORT = 5000;
 
+const codeMap = {
+  American: "us",
+  British: "gb",
+  Canadian: "ca",
+  Chinese: "cn",
+  Croatian: "hr",
+  Dutch: "nl",
+  Egyptian: "eg",
+  Filipino: "ph",
+  French: "fr",
+  Greek: "gr",
+  Indian: "in",
+  Irish: "ie",
+  Italian: "it",
+  Jamaican: "jm",
+  Japanese: "jp",
+  Kenyan: "ke",
+  Malaysian: "my",
+  Mexican: "mx",
+  Moroccan: "ma",
+  Polish: "pl",
+  Portuguese: "pt",
+  Russian: "ru",
+  Spanish: "es",
+  Thai: "th",
+  Tunisian: "tn",
+  Turkish: "tr",
+  Ukrainian: "ua",
+  Vietnamese: "vn",
+};
 app.use(cors())
+
+const getFlagUrl = (country) => {
+  const code = codeMap[country];
+  return code
+    ? `https://flagcdn.com/w320/${code}.png`
+    : "https://via.placeholder.com/100?text=Flag+Not+Found";
+};
+
+// New route to fetch a flag URL based on the country name
+app.get('/api/flag', (req, res) => {
+  const { country } = req.query;
+
+  // Validate if the country parameter exists
+  if (!country) {
+    return res.status(400).json({ error: 'Country name is required' });
+  }
+
+  // Generate the flag URL
+  const flagUrl = getFlagUrl(country);
+
+  res.json({
+    country: country,
+    flag: flagUrl
+  });
+});
+
 
 // Endpoint to fetch a random meal
 app.get('/api/random-meal', async (req, res) => {
