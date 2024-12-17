@@ -9,21 +9,12 @@ Nodejs
 Npm
 
 ### Backend:
-<<<<<<< HEAD
-
-npm i install cors 
-npm i
-cd cuisineGuesser/src
-node server.js
-
-=======
 ```
 1) npm i install cors
 2) npm i
 3) cd cuisineGuesser/src
 4) node server.js
 ```
->>>>>>> c308550d9966d0b43355dc51819f12a4ddc24eba
 http://localhost:5000/
 
 
@@ -35,3 +26,12 @@ http://localhost:5000/
 ```
 
 http://localhost:3000/
+
+
+###Install Packages
+
+
+```
+npm install @mantine/core @mantine/hooks @emotion/react
+npm install react-router-dom 
+```

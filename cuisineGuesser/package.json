@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@mantine/core": "^7.15.1",
+    "@mantine/hooks": "^7.15.1",
     "cors": "^2.8.5",
     "cra-template": "1.2.0",
     "firebase": "^11.0.2",
     "node-fetch": "^3.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.2",
     "react-scripts": "5.0.1",
     "server.js": "^1.0.0",
     "web-vitals": "^4.2.4"

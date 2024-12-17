@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@mantine/core": "^7.15.1",
+    "@mantine/hooks": "^7.15.1",
+    "react-router-dom": "^7.0.2"
+  }
+}
