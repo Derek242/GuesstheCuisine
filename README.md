@@ -1,6 +1,6 @@
 # GuesstheCuisine
 This is for Web Dev Final Project
-Evan - MealDB API
+Evan - MealDB API and React State Management
 Lameya - Frontend React and Figma designs
 Maliha - Frontend React, Mantine, and Countries API
 Derek - Firebase Authentification and Firestore Database
